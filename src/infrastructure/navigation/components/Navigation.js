@@ -1,9 +1,7 @@
+import { createStaticNavigation } from '@react-navigation/native'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
-import { screens } from '../repository'
+import { config } from '../repository'
 
-const RootStack = createNativeStackNavigator({
-  initialRouteName: 'Home',
-  screens
-})
+const RootStack = createNativeStackNavigator(config)
 
 export default createStaticNavigation(RootStack)

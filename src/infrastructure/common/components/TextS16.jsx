@@ -1,8 +1,8 @@
-import { StyleSheet, Text } from 'react-native'
+import { StyleSheet } from 'react-native'
+import Text from './Text'
 
 const styles = StyleSheet.create({
   text: {
-    color: 'rgb(18 20 23)',
     fontSize: 16,
     lineHeight: 24
   }
@@ -10,7 +10,7 @@ const styles = StyleSheet.create({
 
 export default function TextS16({ style, children, ...rest }) {
   return (
-    <Text style={style ? { ...styles.text, ...style } : styles.text} {...rest}>
+    <Text style={[styles.text, style]} {...rest}>
       {children}
     </Text>
   )

@@ -1,6 +1,6 @@
-import { apiRtkQuery } from '../../../infrastructure/api/rtkQuery'
+import { apiRtkQuerySlice } from '../../../infrastructure/api/rtkQuery'
 
-export const authRtkQuery = apiRtkQuery.injectEndpoints({
+export const authRtkQuery = apiRtkQuerySlice.injectEndpoints({
   endpoints: (build) => ({
     login: build.mutation({
       query: (data) => ({

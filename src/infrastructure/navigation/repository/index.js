@@ -1,5 +1,5 @@
-export const screens = {}
+export const config = {}
 
 export const navRepo = {
-  screens
+  config
 }

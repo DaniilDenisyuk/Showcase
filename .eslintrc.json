@@ -11,7 +11,11 @@
     "prettier"
   ],
   "settings": {
-    "import/extensions": ["js", "jsx"]
+    "import/resolver": {
+      "node": {
+        "extensions": [".js", ".jsx", ".d.ts", ".ts", ".tsx"]
+      }
+    }
   },
   "parserOptions": {
     "ecmaVersion": "latest",

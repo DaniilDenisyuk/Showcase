@@ -1,6 +1,6 @@
-import { apiRtkQuery } from '../../../infrastructure/api/rtkQuery'
+import { apiRtkQuerySlice } from '../../../infrastructure/api/rtkQuery'
 
-export const categoryRtkQuery = apiRtkQuery.injectEndpoints({
+export const categoryRtkQuery = apiRtkQuerySlice.injectEndpoints({
   endpoints: (build) => ({
     getList: build.query({
       query: () => ({

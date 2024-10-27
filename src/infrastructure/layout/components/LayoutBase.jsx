@@ -1,10 +1,10 @@
 import { ScrollView } from 'react-native-gesture-handler'
-import { SafeAreaInsetsContext } from 'react-native-safe-area-context'
+import { SafeAreaView } from 'react-native-safe-area-context'
 
-export default function LayoutBase() {
+export default function LayoutBase({ children, ...rest }) {
   return (
-    <ScrollView>
-      <SafeAreaInsetsContext></SafeAreaInsetsContext>
-    </ScrollView>
+    <SafeAreaView {...rest}>
+      <ScrollView>{children}</ScrollView>
+    </SafeAreaView>
   )
 }

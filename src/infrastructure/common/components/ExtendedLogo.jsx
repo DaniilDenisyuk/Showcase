@@ -1,6 +1,6 @@
 import { StyleSheet, View } from 'react-native'
 import Svg, { Circle, Path } from 'react-native-svg'
-import TextS18WB from '../../text/components/TextS18WB'
+import TextS18WB from './TextS18WB'
 
 const styles = StyleSheet.create({
   container: {

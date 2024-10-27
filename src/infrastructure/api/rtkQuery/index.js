@@ -1,6 +1,11 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query'
+import { rootReducer } from '../../redux/repository'
 
-export const apiRtkQuery = createApi({
+export const apiRtkQuerySlice = createApi({
   reducerPath: 'api',
-  baseQuery: fetchBaseQuery({ baseUrl: 'https://pokeapi.co/api/v2/' })
+  baseQuery: fetchBaseQuery({
+    baseUrl: 'https://vocab-builder-backend.p.goit.global/api'
+  })
 })
+
+rootReducer.inject(slice)
