@@ -2,9 +2,11 @@ import { memo } from 'react'
 import { useForm } from 'react-hook-form'
 import { Image, StyleSheet, TextInput, View } from 'react-native'
 import HeadingS30WB from '../../../infrastructure/common/components/HeadingS30WB'
+import ScreenLink from '../../../infrastructure/common/components/ScreenLink'
 import TextS16Dark80 from '../../../infrastructure/common/components/TextS16Dark80'
 import { layoutRepo } from '../../../infrastructure/layout/repository'
 import { typeMap } from '../layout'
+import { registrationScreenName } from '../navigation'
 
 const styles = StyleSheet.create({
   image: {
@@ -35,10 +37,9 @@ const styles = StyleSheet.create({
 const defaultValues = { email: '', password: '' }
 
 export default memo(function LoginScreen() {
-  layoutRepo.useSetType({ type: typeMap.guest })
+  layoutRepo.useSetLayout({ type: typeMap.guest })
   const {} = useForm({
-    defaultValues,
-    validators: {}
+    defaultValues
   })
   return (
     <View>
@@ -58,6 +59,7 @@ export default memo(function LoginScreen() {
           <TextInput style={styles.input} />
         </View>
         <Button></Button>
+        <ScreenLink screen={registrationScreenName} Label="Register" />
       </View>
     </View>
   )

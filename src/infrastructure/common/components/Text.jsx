@@ -1,12 +1,16 @@
-import { StyleSheet, Text } from 'react-native'
+import { Text as RNText, StyleSheet } from 'react-native'
 import { transform } from 'typescript'
-import { colorMap, defaultTextTheme, textThemeMap } from '../repository'
+import {
+  colorTypeToDefMap,
+  defaultTextTheme,
+  textThemeMap
+} from '../repository'
 
 const styles = StyleSheet.create(
   transform(
     textThemeMap,
     (acc, curr) => {
-      acc[curr] = { color: colorMap[curr] }
+      acc[curr] = { color: colorTypeToDefMap[curr] }
     },
     {}
   )
@@ -19,8 +23,8 @@ export default function Text({
   ...rest
 }) {
   return (
-    <Text style={[styles[theme], style]} {...rest}>
+    <RNText style={[styles[theme], style]} {...rest}>
       {children}
-    </Text>
+    </RNText>
   )
 }

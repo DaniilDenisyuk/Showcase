@@ -1,15 +1,16 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { merge } from 'lodash-es'
+import { mergeNoUndef } from '../../common/repository/utils'
 import { rootReducer } from '../../redux/repository'
+import { defaultType } from '../repository'
 
 export const slice = createSlice({
   name: 'layout',
   initialState: {
-    type: null
+    type: defaultType
   },
   reducers: {
     mergeState: (state, { payload }) => {
-      merge(state, payload)
+      mergeNoUndef(state, payload)
     }
   }
 })

@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native'
 import ExtendedLogo from '../../../infrastructure/common/components/ExtendedLogo'
-import LayoutBase from '../../../infrastructure/layout/components/LayoutBase'
+import DefaultLayout from '../../../infrastructure/layout/components/DefaultLayout'
 
 const styles = StyleSheet.create({
   logo: {
@@ -11,9 +11,9 @@ const styles = StyleSheet.create({
 
 export default function LayoutGuest({ children }) {
   return (
-    <LayoutBase>
+    <DefaultLayout>
       <ExtendedLogo style={styles.logo} />
       {children}
-    </LayoutBase>
+    </DefaultLayout>
   )
 }
