@@ -1,11 +1,21 @@
-import { useState } from 'react'
-import { Pressable, StyleSheet } from 'react-native'
+import { useEffect, useState } from 'react'
+import { StyleSheet } from 'react-native'
+import { Pressable } from 'react-native-gesture-handler'
+import {
+  cancelAnimation,
+  Easing,
+  useAnimatedStyle,
+  useSharedValue,
+  withRepeat,
+  withTiming
+} from 'react-native-reanimated'
 import {
   buttonThemeMap,
   colorTypeToDefMap,
   defaultButtonTheme,
   textThemeMap
 } from '../repository'
+import AnimatedLinearGradient from './AnimatedLinearGradient'
 import TextS18WB from './TextS18WB'
 
 const makeHoveredThemeStyleName = (theme) => `${theme}Hovered`
@@ -37,7 +47,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     paddingLeft: 16,
-    paddingRight: 16
+    paddingRight: 16,
+    overflow: 'hidden'
   },
   animatedObject: {
     height: 56,
@@ -77,15 +88,36 @@ const styles = StyleSheet.create({
   }
 })
 
-export default function Button({
+export default function LoadingButton({
   theme = defaultButtonTheme,
   style,
   children,
   onHoverIn,
   onHoverOut,
+  isLoading,
   ...rest
 }) {
   const [isHovered, setIsHovered] = useState(false)
+  const animatedLeft = useSharedValue('0%')
+  const animatedStyle = useAnimatedStyle(() => ({
+    left: animatedLeft.value
+  }))
+  useEffect(() => {
+    if (!isLoading) {
+      return
+    }
+    animatedLeft.value = withRepeat(
+      withTiming('100%', {
+        duration: 500,
+        easing: Easing.inOut,
+        toValue: 100
+      }),
+      0
+    )
+    return () => {
+      cancelAnimation(animatedLeft)
+    }
+  }, [isLoading])
   return (
     <Pressable
       {...rest}
@@ -104,6 +136,14 @@ export default function Button({
         style
       ]}
     >
+      {isLoading && (
+        <AnimatedLinearGradient
+          colors={['transparent', colorTypeToDefMap.light40, 'transparent']}
+          start={{ x: 0, y: 0 }}
+          end={{ x: 1, y: 0 }}
+          style={[styles.animatedObject, animatedStyle]}
+        />
+      )}
       <TextS18WB theme={buttonThemeToTextThemeMap[theme]}>{children}</TextS18WB>
     </Pressable>
   )

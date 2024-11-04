@@ -1,6 +1,7 @@
 import { useNavigation } from '@react-navigation/native'
 import { useState } from 'react'
-import { Pressable, StyleSheet } from 'react-native'
+import { StyleSheet } from 'react-native'
+import { Pressable } from 'react-native-gesture-handler'
 import { textThemeMap } from '../repository'
 import TextS16 from './TextS16'
 
@@ -10,7 +11,7 @@ const styles = StyleSheet.create({
   }
 })
 
-export default function ScreenLink({ screen, Label, ...rest }) {
+export default function ScreenLink({ children, screen, ...rest }) {
   const { navigate } = useNavigation()
   const [isHovered, setIsHovered] = useState(false)
   return (
@@ -30,7 +31,7 @@ export default function ScreenLink({ screen, Label, ...rest }) {
         theme={isHovered ? textThemeMap.dark : textThemeMap.dark50}
         style={styles.label}
       >
-        {Label}
+        {children}
       </TextS16>
     </Pressable>
   )

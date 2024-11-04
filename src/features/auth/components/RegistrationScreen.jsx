@@ -1,57 +1,62 @@
+import { joiResolver } from '@hookform/resolvers/joi'
+import Joi from 'joi'
 import { memo } from 'react'
-import { View } from 'react-native'
+import { useForm } from 'react-hook-form'
+import RHFPasswordInput from '../../../infrastructure/common/components/RHFPasswordInput'
 import RHFTextInput from '../../../infrastructure/common/components/RHFTextInput'
 import { layoutRepo } from '../../../infrastructure/layout/repository'
+import { emailSchema, passwordSchema } from '../joi'
+import { typeMap } from '../layout'
+import { screenNameMap } from '../navigation'
+import { slice } from '../rtkQuery'
+import GuestScreenContainer from './GuestScreenContainer'
 
-const styles = StyleSheet.create({
-  image: {
-    marginBottom: 8
-  },
-  contentContainer: {
-    paddingTop: 32,
-    paddingRight: 16,
-    paddingBottom: 32,
-    paddingLeft: 16
-  },
-  heading: {
-    marginTop: 32,
-    marginBottom: 16
-  },
-  description: {
-    marginBottom: 16
-  },
-  form: {
-    marginBottom: 32,
-    gap: 14
-  },
-  submit: {},
-  login: {}
+const defaultValues = {
+  name: '',
+  email: '',
+  password: ''
+}
+
+const schema = Joi.object({
+  name: Joi.string().trim().min(2).required(),
+  email: emailSchema.required(),
+  password: passwordSchema.required()
 })
 
 export default memo(function RegistrationScreen() {
   layoutRepo.useSetLayout({ type: typeMap.guest })
-  const {} = useForm({
-    defaultValues
+  const { control, handleSubmit } = useForm({
+    defaultValues,
+    resolver: joiResolver(schema),
+    reValidateMode: 'onBlur',
+    mode: 'onBlur'
   })
+  const [signIn, { isLoading }] = slice.endpoints.singIn.useMutation()
   return (
-    <View>
-      <Image
-        style={styles.image}
-        source={require('./src/assets/pictures/readVocab.png')}
-      />
-      <View>
-        <HeadingS30WB style={styles.heading}>Register</HeadingS30WB>
-        <TextS16Dark80 style={styles.description}>
-          To start using our services, please fill out the registration form
-          below. All fields are mandatory:
-        </TextS16Dark80>
-        <View style={styles.inputGroup}>
-          <RHFTextInput name="name" />
-          <RHFTextInput name="email" />
-          <RHFTextInput name="email" />
-        </View>
-        <Button></Button>
-      </View>
-    </View>
+    <GuestScreenContainer
+      heading="Register"
+      description="To start using our services, please fill out the registration form
+          below. All fields are mandatory:"
+      inputs={
+        <>
+          <RHFTextInput name="name" control={control} />,
+          <RHFTextInput name="email" control={control} />,
+          <RHFPasswordInput name="password" control={control} />
+        </>
+      }
+      submitButton={
+        <GuestScreenContainer.SubmitButton
+          onPress={handleSubmit(signIn)}
+          isLoading={isLoading}
+        >
+          Register
+        </GuestScreenContainer.SubmitButton>
+      }
+      screenLink={
+        <GuestScreenContainer.ScreenLink screen={screenNameMap.Login}>
+          Login
+        </GuestScreenContainer.ScreenLink>
+      }
+    />
   )
 })

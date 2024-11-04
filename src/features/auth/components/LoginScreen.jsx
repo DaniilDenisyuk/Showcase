@@ -1,66 +1,57 @@
+import { joiResolver } from '@hookform/resolvers/joi'
+import Joi from 'joi'
 import { memo } from 'react'
 import { useForm } from 'react-hook-form'
-import { Image, StyleSheet, TextInput, View } from 'react-native'
-import HeadingS30WB from '../../../infrastructure/common/components/HeadingS30WB'
-import ScreenLink from '../../../infrastructure/common/components/ScreenLink'
-import TextS16Dark80 from '../../../infrastructure/common/components/TextS16Dark80'
+import RHFPasswordInput from '../../../infrastructure/common/components/RHFPasswordInput'
+import RHFTextInput from '../../../infrastructure/common/components/RHFTextInput'
 import { layoutRepo } from '../../../infrastructure/layout/repository'
+import { emailSchema, passwordSchema } from '../joi'
 import { typeMap } from '../layout'
-import { registrationScreenName } from '../navigation'
+import { screenNameMap } from '../navigation'
+import { slice } from '../rtkQuery'
+import GuestScreenContainer from './GuestScreenContainer'
 
-const styles = StyleSheet.create({
-  image: {
-    marginBottom: 8
-  },
-  contentContainer: {
-    paddingTop: 32,
-    paddingRight: 16,
-    paddingBottom: 32,
-    paddingLeft: 16
-  },
-  heading: {
-    marginTop: 32,
-    marginBottom: 16
-  },
-  description: {
-    marginBottom: 16
-  },
-  form: {
-    marginBottom: 32,
-    gap: 14
-  },
-  input: { height: 56 },
-  submit: {},
-  login: {}
+const defaultValues = {
+  email: '',
+  password: ''
+}
+
+const schema = Joi.object({
+  email: emailSchema.required(),
+  password: passwordSchema.required()
 })
-
-const defaultValues = { email: '', password: '' }
 
 export default memo(function LoginScreen() {
   layoutRepo.useSetLayout({ type: typeMap.guest })
-  const {} = useForm({
-    defaultValues
+  const { control, handleSubmit } = useForm({
+    defaultValues,
+    resolver: joiResolver(schema)
   })
+  const [signIn, { isLoading }] = slice.endpoints.singIn.useMutation()
   return (
-    <View>
-      <Image
-        style={styles.image}
-        source={require('./src/assets/pictures/readVocab.png')}
-      />
-      <View>
-        <HeadingS30WB style={styles.heading}>Register</HeadingS30WB>
-        <TextS16Dark80 style={styles.description}>
-          To start using our services, please fill out the registration form
-          below. All fields are mandatory:
-        </TextS16Dark80>
-        <View style={styles.inputGroup}>
-          <TextInput style={styles.input} />
-          <TextInput style={styles.input} />
-          <TextInput style={styles.input} />
-        </View>
-        <Button></Button>
-        <ScreenLink screen={registrationScreenName} Label="Register" />
-      </View>
-    </View>
+    <GuestScreenContainer
+      shouldShowText
+      heading="Login"
+      description="Please enter your login details to continue using our service:"
+      inputs={
+        <>
+          <RHFTextInput name="email" control={control} />,
+          <RHFPasswordInput name="password" control={control} />
+        </>
+      }
+      submitButton={
+        <GuestScreenContainer.SubmitButton
+          onPress={handleSubmit(signIn)}
+          isLoading={isLoading}
+        >
+          Login
+        </GuestScreenContainer.SubmitButton>
+      }
+      screenLink={
+        <GuestScreenContainer.ScreenLink screen={screenNameMap.Registration}>
+          Register
+        </GuestScreenContainer.ScreenLink>
+      }
+    />
   )
 })

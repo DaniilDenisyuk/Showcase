@@ -1,7 +1,7 @@
 import { useController } from 'react-hook-form'
 import FormPasswordInput from './FormPasswordInput'
 
-export default function RHFTextInput({
+export default function RHFPasswordInput({
   control,
   name,
   validMessage,

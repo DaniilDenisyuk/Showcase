@@ -1,4 +1,4 @@
 {
-  "include": ["**/*.js", "**/*.jsx"],
+  "include": ["**/*.js", "**/*.jsx", "metro.config.cjs"],
   "exclude": ["node_modules", "public", "build"]
 }

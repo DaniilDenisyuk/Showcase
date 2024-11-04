@@ -1,18 +1,16 @@
 import { StyleSheet } from 'react-native'
-import Text from './Text'
+import TextS18 from './TextS18'
 
 const styles = StyleSheet.create({
   text: {
-    fontWeight: 'bold',
-    fontSize: 18,
-    lineHeight: 24
+    fontWeight: 'bold'
   }
 })
 
 export default function TextS18WB({ style, children, ...rest }) {
   return (
-    <Text style={[styles.text, style]} {...rest}>
+    <TextS18 style={[styles.text, style]} {...rest}>
       {children}
-    </Text>
+    </TextS18>
   )
 }

@@ -21,7 +21,12 @@ export default [
     },
     languageOptions: {
       ecmaVersion: 'latest',
-      sourceType: 'module'
+      sourceType: 'module',
+      globals: {
+        require: 'readonly',
+        module: 'readonly',
+        __dirname: 'readonly'
+      }
     },
     rules: {
       'react/prop-types': 'off',

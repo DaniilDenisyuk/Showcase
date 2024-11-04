@@ -1,5 +1,6 @@
 import { useState } from 'react'
-import { Pressable, StyleSheet, TextInput, View } from 'react-native'
+import { StyleSheet, TextInput, View } from 'react-native'
+import { Pressable } from 'react-native-gesture-handler'
 import Svg, { ClipPath, Defs, G, Path, Rect } from 'react-native-svg'
 import {
   colorTypeToDefMap,

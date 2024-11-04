@@ -1,24 +1,22 @@
 import { StatusBar, StyleSheet } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
-import { colorTypeToDefMap } from '../../common/repository'
+import { colorTypeToDefMap } from '../../../infrastructure/common/repository'
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: colorTypeToDefMap.green,
-    alignItems: 'center',
-    justifyContent: 'center'
+    backgroundColor: colorTypeToDefMap.light
   }
 })
 
-export default function DefaultLayout({ children, ...rest }) {
+export default function GuestLayout({ children, ...rest }) {
   return (
     <SafeAreaView {...rest} style={styles.container}>
       <StatusBar
-        animated={true}
+        animated
         translucent
         backgroundColor="transparent"
-        barStyle="light-content"
+        barStyle="dark-content"
       />
       {children}
     </SafeAreaView>

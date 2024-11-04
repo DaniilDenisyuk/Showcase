@@ -6,9 +6,11 @@ export const colorTypeToDefMap = {
   dark50: 'rgba(18 20 23 / 0.5)',
   dark10: 'rgba(18 20 23 / 0.1)',
   green: 'rgb(133 170 159)',
+  green10: 'rgb(133 170 159 / 0.1)',
   greenLighter: 'rgb(165 192 184)',
   light: 'rgb(252 252 252)',
   lightDarker: 'rgb(248 248 248)',
+  light50: 'rgba(252 252 252 / 0.5)',
   light40: 'rgba(252 252 252 / 0.4)',
   invalid: 'rgb(216 0 39)',
   valid: 'rgb(60 191 97)'
@@ -22,6 +24,7 @@ export const textThemeMap = {
   greenLighter: 'greenLighter',
   light: 'light',
   lightDarker: 'lightDarker',
+  light50: 'light50',
   light40: 'light40',
   invalid: 'invalid',
   valid: 'valid'
@@ -35,6 +38,19 @@ export const buttonThemeMap = {
   darkOnLight: 'darkOnLight',
   darkOnDark: 'darkOnDark'
 }
+
+export const buttonShapeMap = {
+  rounded30: 'rounded30',
+  rounded15: 'rounded15'
+}
+
+export const buttonSizeMap = {
+  lg: 'lg',
+  md: 'md',
+  sm: 'sm'
+}
+
+export const defaultButtonShape = buttonShapeMap.rounded30
 
 export const defaultButtonTheme = buttonThemeMap.darkOnLight
 

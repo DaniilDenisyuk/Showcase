@@ -1,5 +1,5 @@
 import { merge } from 'lodash-es'
 import { navRepo } from '../../navigation/repository'
-import LayoutManager from '../components/LayoutManager'
+import DefaultLayoutManager from '../components/DefaultLayoutManager'
 
-merge(navRepo.config, { layout: LayoutManager })
+merge(navRepo.config, { layout: DefaultLayoutManager })
