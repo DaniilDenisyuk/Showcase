@@ -1,9 +1,9 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query'
+import { API_BASE_URL } from '../../common/repository/env'
 import { rootReducer } from '../../redux/repository'
-import { url } from '../repository'
 
 const defaultBaseQuery = fetchBaseQuery({
-  baseUrl: url
+  baseUrl: API_BASE_URL
 })
 
 let baseQuery = defaultBaseQuery

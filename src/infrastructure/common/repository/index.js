@@ -1,10 +1,28 @@
 import { StyleSheet } from 'react-native'
 
+export const colorTypeMap = {
+  dark: 'dark',
+  dark80: 'dark80',
+  dark50: 'dark50',
+  dark10: 'dark10',
+  dark8: 'dark8',
+  green: 'green',
+  green10: 'green10',
+  greenLighter: 'greenLighter',
+  light: 'light',
+  lightDarker: 'lightDarker',
+  light50: 'light50',
+  light40: 'light40',
+  invalid: 'invalid',
+  valid: 'valid'
+}
+
 export const colorTypeToDefMap = {
   dark: 'rgb(18 20 23)',
   dark80: 'rgba(18 20 23 / 0.8)',
   dark50: 'rgba(18 20 23 / 0.5)',
   dark10: 'rgba(18 20 23 / 0.1)',
+  dark8: 'rgba(18 20 23 / 0.08)',
   green: 'rgb(133 170 159)',
   green10: 'rgb(133 170 159 / 0.1)',
   greenLighter: 'rgb(165 192 184)',

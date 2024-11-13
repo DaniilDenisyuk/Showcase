@@ -1,10 +1,12 @@
 import Svg, { Path, Rect } from 'react-native-svg'
-import { colorTypeToDefMap } from '../repository'
+import { colorTypeMap, colorTypeToDefMap } from '../repository'
 
 function LeftAngle({ style }) {
   return (
     <Svg
       style={style}
+      width="18"
+      height="25"
       viewBox="0 0 18 25"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
@@ -21,6 +23,8 @@ function SignOut({ style }) {
   return (
     <Svg
       style={style}
+      width="16"
+      height="16"
       viewBox="0 0 16 16"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
@@ -28,16 +32,16 @@ function SignOut({ style }) {
       <Path
         d="M8 11.3333C8 11.9533 8 12.2633 7.93185 12.5176C7.74692 13.2078 7.20782 13.7469 6.51764 13.9319C6.26331 14 5.95332 14 5.33333 14H5C4.06812 14 3.60218 14 3.23463 13.8478C2.74458 13.6448 2.35523 13.2554 2.15224 12.7654C2 12.3978 2 11.9319 2 11V5C2 4.06812 2 3.60218 2.15224 3.23463C2.35523 2.74458 2.74458 2.35523 3.23463 2.15224C3.60218 2 4.06812 2 5 2H5.33333C5.95332 2 6.26331 2 6.51764 2.06815C7.20782 2.25308 7.74692 2.79218 7.93185 3.48236C8 3.7367 8 4.04669 8 4.66667"
         stroke={colorTypeToDefMap.green}
-        stroke-width="1.5"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
       <Path
         d="M10.6667 11.3333L14 7.99999M14 7.99999L10.6667 4.66666M14 7.99999H6"
         stroke={colorTypeToDefMap.green}
-        stroke-width="1.5"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
     </Svg>
   )
@@ -47,6 +51,8 @@ function User({ style }) {
   return (
     <Svg
       style={style}
+      width="49"
+      height="48"
       viewBox="0 0 49 48"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
@@ -61,16 +67,18 @@ function User({ style }) {
       <Path
         d="M24.5 16C25.5609 16 26.5783 16.4214 27.3284 17.1716C28.0786 17.9217 28.5 18.9391 28.5 20C28.5 21.0609 28.0786 22.0783 27.3284 22.8284C26.5783 23.5786 25.5609 24 24.5 24C23.4391 24 22.4217 23.5786 21.6716 22.8284C20.9214 22.0783 20.5 21.0609 20.5 20C20.5 18.9391 20.9214 17.9217 21.6716 17.1716C22.4217 16.4214 23.4391 16 24.5 16ZM24.5 32C24.5 32 32.5 32 32.5 30C32.5 27.6 28.6 25 24.5 25C20.4 25 16.5 27.6 16.5 30C16.5 32 24.5 32 24.5 32Z"
         fill={colorTypeToDefMap.light}
-        fill-opacity="0.7"
+        fillOpacity="0.7"
       />
     </Svg>
   )
 }
 
-function Star({ style, theme }) {
+function Star({ style, theme = colorTypeMap.green }) {
   return (
     <Svg
       style={style}
+      width="24"
+      height="24"
       viewBox="0 0 24 24"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
@@ -78,19 +86,21 @@ function Star({ style, theme }) {
       <Path
         d="M11.2827 3.45332C11.5131 2.98638 11.6284 2.75291 11.7848 2.67831C11.9209 2.61341 12.0791 2.61341 12.2152 2.67831C12.3717 2.75291 12.4869 2.98638 12.7174 3.45332L14.9041 7.88328C14.9721 8.02113 15.0061 8.09006 15.0558 8.14358C15.0999 8.19096 15.1527 8.22935 15.2113 8.25662C15.2776 8.28742 15.3536 8.29854 15.5057 8.32077L20.397 9.03571C20.9121 9.11099 21.1696 9.14863 21.2888 9.27444C21.3925 9.38389 21.4412 9.5343 21.4215 9.68377C21.3988 9.85558 21.2124 10.0372 20.8395 10.4004L17.3014 13.8464C17.1912 13.9538 17.136 14.0076 17.1004 14.0715C17.0689 14.128 17.0487 14.1902 17.0409 14.2545C17.0321 14.3271 17.0451 14.403 17.0711 14.5547L17.906 19.4221C17.994 19.9355 18.038 20.1922 17.9553 20.3445C17.8833 20.477 17.7554 20.57 17.6071 20.5975C17.4366 20.6291 17.2061 20.5078 16.7451 20.2654L12.3724 17.9658C12.2361 17.8942 12.168 17.8584 12.0962 17.8443C12.0327 17.8318 11.9673 17.8318 11.9038 17.8443C11.832 17.8584 11.7639 17.8942 11.6277 17.9658L7.25492 20.2654C6.79392 20.5078 6.56341 20.6291 6.39297 20.5975C6.24468 20.57 6.11672 20.477 6.04474 20.3445C5.962 20.1922 6.00603 19.9355 6.09407 19.4221L6.92889 14.5547C6.95491 14.403 6.96793 14.3271 6.95912 14.2545C6.95132 14.1902 6.93111 14.128 6.89961 14.0715C6.86402 14.0076 6.80888 13.9538 6.69859 13.8464L3.16056 10.4004C2.78766 10.0372 2.60121 9.85558 2.57853 9.68377C2.55879 9.5343 2.60755 9.38389 2.71125 9.27444C2.83044 9.14863 3.08797 9.11099 3.60304 9.03571L8.49431 8.32077C8.64642 8.29854 8.72248 8.28742 8.78872 8.25662C8.84736 8.22935 8.90016 8.19096 8.94419 8.14358C8.99391 8.09006 9.02793 8.02113 9.09597 7.88328L11.2827 3.45332Z"
         stroke={colorTypeToDefMap[theme]}
-        stroke-opacity="0.5"
-        stroke-width="1.3"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeOpacity="0.5"
+        strokeWidth="1.3"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
     </Svg>
   )
 }
 
-function Edit({ style, theme }) {
+function Edit({ style, theme = colorTypeMap.green }) {
   return (
     <Svg
       style={style}
+      width="24"
+      height="24"
       viewBox="0 0 24 24"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
@@ -98,25 +108,27 @@ function Edit({ style, theme }) {
       <Path
         d="M11 4H6.8C5.11984 4 4.27976 4 3.63803 4.32698C3.07354 4.6146 2.6146 5.07354 2.32698 5.63803C2 6.27976 2 7.11984 2 8.8V17.2C2 18.8802 2 19.7202 2.32698 20.362C2.6146 20.9265 3.07354 21.3854 3.63803 21.673C4.27976 22 5.11984 22 6.8 22H15.2C16.8802 22 17.7202 22 18.362 21.673C18.9265 21.3854 19.3854 20.9265 19.673 20.362C20 19.7202 20 18.8802 20 17.2V13"
         stroke={colorTypeToDefMap[theme]}
-        stroke-width="1.3"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeWidth="1.3"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
       <Path
         d="M8 14.3255C8 13.8363 8 13.5917 8.05526 13.3615C8.10425 13.1574 8.18506 12.9624 8.29472 12.7834C8.4184 12.5816 8.59136 12.4086 8.93726 12.0627L18.5 2.49998C19.3285 1.67155 20.6716 1.67156 21.5 2.49998C22.3285 3.32841 22.3285 4.67156 21.5 5.49998L11.9373 15.0627C11.5914 15.4086 11.4184 15.5816 11.2166 15.7053C11.0377 15.8149 10.8426 15.8957 10.6385 15.9447C10.4083 16 10.1637 16 9.67454 16H8V14.3255Z"
         stroke={colorTypeToDefMap[theme]}
-        stroke-width="1.3"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeWidth="1.3"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
     </Svg>
   )
 }
 
-function OpenBook({ style, theme }) {
+function OpenBook({ style, theme = colorTypeMap.green }) {
   return (
     <Svg
       style={style}
+      width="24"
+      height="24"
       viewBox="0 0 24 24"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
@@ -124,19 +136,86 @@ function OpenBook({ style, theme }) {
       <Path
         d="M22 6.2C22 5.07989 22 4.51984 21.782 4.09202C21.5903 3.71569 21.2843 3.40973 20.908 3.21799C20.4802 3 19.9201 3 18.8 3H18.4C16.1598 3 15.0397 3 14.184 3.43597C13.4314 3.81947 12.8195 4.43139 12.436 5.18404C12 6.03968 12 7.15979 12 9.4V21L12.1001 20.8499C12.7947 19.808 13.142 19.287 13.6009 18.9098C14.0071 18.5759 14.4752 18.3254 14.9784 18.1726C15.5467 18 16.1729 18 17.4252 18H18.8C19.9201 18 20.4802 18 20.908 17.782C21.2843 17.5903 21.5903 17.2843 21.782 16.908C22 16.4802 22 15.9201 22 14.8V6.2Z"
         stroke={colorTypeToDefMap[theme]}
-        stroke-width="1.3"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeWidth="1.3"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
       <Path
         d="M2 6.2C2 5.07989 2 4.51984 2.21799 4.09202C2.40973 3.71569 2.71569 3.40973 3.09202 3.21799C3.51984 3 4.07989 3 5.2 3H5.6C7.84021 3 8.96031 3 9.81596 3.43597C10.5686 3.81947 11.1805 4.43139 11.564 5.18404C12 6.03968 12 7.15979 12 9.4V21L11.8999 20.8499C11.2053 19.808 10.858 19.287 10.3991 18.9098C9.99286 18.5759 9.52476 18.3254 9.02161 18.1726C8.45325 18 7.82711 18 6.57482 18H5.2C4.07989 18 3.51984 18 3.09202 17.782C2.71569 17.5903 2.40973 17.2843 2.21799 16.908C2 16.4802 2 15.9201 2 14.8V6.2Z"
         stroke={colorTypeToDefMap[theme]}
-        stroke-width="1.3"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeWidth="1.3"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
     </Svg>
   )
 }
 
-export default { LeftAngle, SignOut, User, Star, Edit, OpenBook }
+function Edit2({ style, theme = colorTypeMap.green }) {
+  return (
+    <Svg
+      style={style}
+      width="16"
+      height="17"
+      viewBox="0 0 16 17"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <Path
+        d="M2 4.5H3.33333H14"
+        stroke={colorTypeToDefMap[theme]}
+        strokeOpacity="0.94"
+        strokeWidth="1.3"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <Path
+        d="M12.6673 4.49998V13.8333C12.6673 14.1869 12.5268 14.5261 12.2768 14.7761C12.0267 15.0262 11.6876 15.1666 11.334 15.1666H4.66732C4.3137 15.1666 3.97456 15.0262 3.72451 14.7761C3.47446 14.5261 3.33398 14.1869 3.33398 13.8333V4.49998M5.33398 4.49998V3.16665C5.33398 2.81302 5.47446 2.47389 5.72451 2.22384C5.97456 1.97379 6.3137 1.83331 6.66732 1.83331H9.33398C9.68761 1.83331 10.0267 1.97379 10.2768 2.22384C10.5268 2.47389 10.6673 2.81302 10.6673 3.16665V4.49998"
+        stroke={colorTypeToDefMap[theme]}
+        strokeOpacity="0.94"
+        strokeWidth="1.3"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <Path
+        d="M6.66602 7.83331V11.8333"
+        stroke={colorTypeToDefMap[theme]}
+        strokeOpacity="0.94"
+        strokeWidth="1.3"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <Path
+        d="M9.33398 7.83331V11.8333"
+        stroke={colorTypeToDefMap[theme]}
+        strokeOpacity="0.94"
+        strokeWidth="1.3"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </Svg>
+  )
+}
+
+function Trash2({ style, theme = colorTypeMap.green }) {
+  return (
+    <Svg
+      style={style}
+      width="16"
+      height="17"
+      viewBox="0 0 16 17"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <Path
+        d="M11.334 2.49998C11.5091 2.32488 11.7169 2.18599 11.9457 2.09123C12.1745 1.99647 12.4197 1.94769 12.6673 1.94769C12.9149 1.94769 13.1601 1.99647 13.3889 2.09123C13.6177 2.18599 13.8256 2.32488 14.0007 2.49998C14.1757 2.67507 14.3146 2.88294 14.4094 3.11172C14.5042 3.34049 14.5529 3.58569 14.5529 3.83331C14.5529 4.08093 14.5042 4.32613 14.4094 4.55491C14.3146 4.78368 14.1757 4.99155 14.0007 5.16664L5.00065 14.1666L1.33398 15.1666L2.33398 11.5L11.334 2.49998Z"
+        stroke={colorTypeToDefMap[theme]}
+        strokeWidth="1.3"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </Svg>
+  )
+}
+
+export default { LeftAngle, SignOut, User, Star, Edit, OpenBook, Edit2, Trash2 }
