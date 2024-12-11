@@ -1,8 +1,11 @@
-import { useMemo, useRef, useState } from 'react'
+import { createContext, useMemo, useRef, useState } from 'react'
 import { immutableSplice } from '../../common/repository/utils'
-import { Context } from '../repository'
 
-export default function PortalProvider({ children }) {
+const Context = createContext({
+  portal: () => {}
+})
+
+export default function TopLevelPortalProvider({ children }) {
   const [portaled, setPortaled] = useState([])
   const idIndexMapRef = useRef({})
   const context = useMemo(
@@ -27,3 +30,5 @@ export default function PortalProvider({ children }) {
     </Context.Provider>
   )
 }
+
+TopLevelPortalProvider.Context = Context

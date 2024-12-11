@@ -1,27 +1,12 @@
-import { forwardRef, useEffect } from 'react'
+import { forwardRef, useContext, useEffect } from 'react'
 
 import { useMergeRefs } from '@floating-ui/react-native'
-import { StyleSheet } from 'react-native'
-import {
-  Pressable,
-  TouchableWithoutFeedback
-} from 'react-native-gesture-handler'
+import { Modal } from 'react-native'
+import { Pressable } from 'react-native-gesture-handler'
 import Animated, { useSharedValue, withTiming } from 'react-native-reanimated'
-import Portal from '../../portal/components/Portal'
+import ScrollViewXProvider from '../../common/components/ScrollViewXProvider'
 import { useManager, useReferenceProps } from '../floatingUI'
 import { Context, useManagerContext } from '../repository'
-
-const styles = StyleSheet.create({
-  touchInterceptor: {
-    inset: 0,
-    zIndex: 99,
-    position: 'absolute',
-    backgroundColor: 'transparent'
-  },
-  floatingContainer: {
-    zIndex: 100
-  }
-})
 
 export const Trigger = forwardRef(function Trigger(
   { children, ...rest },
@@ -37,21 +22,13 @@ export const Trigger = forwardRef(function Trigger(
   )
 })
 
-export const TouchInterceptor = forwardRef(function PopupManager() {
-  const { toggle } = useManagerContext()
-  return (
-    <TouchableWithoutFeedback
-      style={styles.touchInterceptor}
-      onPress={toggle}
-    />
-  )
-})
-
 export const FloatingContainer = forwardRef(function FloatingContainer(
   { children, style, ...rest },
   ref
 ) {
   const {
+    isOpened,
+    toggle,
     floatingContext: { floatingStyles }
   } = useManagerContext()
   const opacity = useSharedValue(0)
@@ -59,31 +36,38 @@ export const FloatingContainer = forwardRef(function FloatingContainer(
     opacity.value = withTiming(1, { duration: 200 })
   }, [])
   return (
-    <Animated.View
-      style={[styles.floatingContainer, floatingStyles, { opacity }, style]}
+    <Modal
       ref={ref}
+      animationType="none"
+      visible={isOpened}
+      transparent
+      onDismiss={toggle}
+      onRequestClose={toggle}
       {...rest}
     >
-      {children}
-    </Animated.View>
+      <Animated.View style={[floatingStyles, { opacity }, style]}>
+        {children}
+      </Animated.View>
+    </Modal>
   )
 })
 
-export const Manager = forwardRef(function PopupManager({
+export const Manager = forwardRef(function Manager({
   reference,
   floating,
   ...managerProps
 }) {
   const context = useManager(managerProps)
+  const { onScroll } = useContext(ScrollViewXProvider.Context)
+  useEffect(() => {
+    onScroll(context.floatingUIContext.scrollProps.onScroll)
+  }, [onScroll])
   return (
     <Context.Provider value={context}>
       {reference}
-      <Portal>
-        {floating}
-        <TouchInterceptor />
-      </Portal>
+      {floating}
     </Context.Provider>
   )
 })
 
-export default { Manager, FloatingContainer, TouchInterceptor, Trigger }
+export default { Manager, FloatingContainer, Trigger }

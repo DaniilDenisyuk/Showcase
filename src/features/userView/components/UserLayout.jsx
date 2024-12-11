@@ -1,7 +1,7 @@
 import { StyleSheet } from 'react-native'
 import { ScrollView } from 'react-native-gesture-handler'
 import { colorTypeToDefMap } from '../../../infrastructure/common/repository'
-import PortalProvider from '../../../infrastructure/portal/components/PortalProvider'
+import TopLevelPortalProvider from '../../../infrastructure/topLevelPortal/components/TopLevelPortalProvider'
 
 const styles = StyleSheet.create({
   container: {
@@ -12,7 +12,7 @@ const styles = StyleSheet.create({
 export default function UserLayout({ children, style, ...rest }) {
   return (
     <ScrollView style={[styles.container, style]} {...rest}>
-      <PortalProvider>{children}</PortalProvider>
+      <TopLevelPortalProvider>{children}</TopLevelPortalProvider>
     </ScrollView>
   )
 }
