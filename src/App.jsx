@@ -1,16 +1,19 @@
+import { View } from 'react-native'
 import { KeyboardProvider } from 'react-native-keyboard-controller'
 import { SafeAreaProvider } from 'react-native-safe-area-context'
-import Navigation from './infrastructure/reactNavigation/components/Navigation'
+import Text from './infrastructure/common/components/Text'
 import ReduxProvider from './infrastructure/redux/components/ReduxProvider'
 
 export default function App() {
   return (
-    <KeyboardProvider>
-      <ReduxProvider>
+    <ReduxProvider>
+      <KeyboardProvider>
         <SafeAreaProvider>
-          <Navigation />
+          <View>
+            <Text>Hello World</Text>
+          </View>
         </SafeAreaProvider>
-      </ReduxProvider>
-    </KeyboardProvider>
+      </KeyboardProvider>
+    </ReduxProvider>
   )
 }

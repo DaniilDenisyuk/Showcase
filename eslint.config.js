@@ -1,7 +1,9 @@
+import { fixupPluginRules } from '@eslint/compat'
 import js from '@eslint/js'
 import eslintConfigPrettier from 'eslint-config-prettier'
 import importPlugin from 'eslint-plugin-import'
 import reactPlugin from 'eslint-plugin-react'
+import reactNativePlugin from 'eslint-plugin-react-native'
 
 export default [
   js.configs.recommended,
@@ -21,14 +23,15 @@ export default [
     },
     languageOptions: {
       ecmaVersion: 'latest',
-      sourceType: 'module',
-      globals: {
-        require: 'readonly',
-        module: 'readonly',
-        __dirname: 'readonly'
-      }
+      sourceType: 'module'
+    },
+    plugins: {
+      'react-native': fixupPluginRules({
+        rules: reactNativePlugin.rules
+      })
     },
     rules: {
+      ...reactNativePlugin.configs.all.rules,
       'react/prop-types': 'off',
       'import/no-named-as-default-member': 'off'
     },

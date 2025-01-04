@@ -1,10 +1,9 @@
-import { forwardRef, useContext, useEffect } from 'react'
+import { forwardRef, useEffect } from 'react'
 
 import { useMergeRefs } from '@floating-ui/react-native'
 import { Modal } from 'react-native'
 import { Pressable } from 'react-native-gesture-handler'
 import Animated, { useSharedValue, withTiming } from 'react-native-reanimated'
-import ScrollViewXProvider from '../../common/components/ScrollViewXProvider'
 import { useManager, useReferenceProps } from '../floatingUI'
 import { Context, useManagerContext } from '../repository'
 
@@ -52,22 +51,18 @@ export const FloatingContainer = forwardRef(function FloatingContainer(
   )
 })
 
-export const Manager = forwardRef(function Manager({
-  reference,
-  floating,
-  ...managerProps
-}) {
-  const context = useManager(managerProps)
-  const { onScroll } = useContext(ScrollViewXProvider.Context)
-  useEffect(() => {
-    onScroll(context.floatingUIContext.scrollProps.onScroll)
-  }, [onScroll])
+export function Structure({ reference, floating }) {
   return (
-    <Context.Provider value={context}>
+    <>
       {reference}
       {floating}
-    </Context.Provider>
+    </>
   )
-})
+}
 
-export default { Manager, FloatingContainer, Trigger }
+export function Manager({ children, ...managerProps }) {
+  const context = useManager(managerProps)
+  return <Context.Provider value={context}>{children}</Context.Provider>
+}
+
+export default { Manager, Structure, FloatingContainer, Trigger }

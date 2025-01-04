@@ -3,13 +3,13 @@ import Joi from 'joi'
 import { memo } from 'react'
 import { useForm } from 'react-hook-form'
 import RHFPasswordInput from '../../../infrastructure/common/components/RHFPasswordInput'
-import RHFTextInput from '../../../infrastructure/common/components/RHFTextInput'
+import TextInputRHFG from '../../../infrastructure/common/components/TextInputRHFG'
 import { layoutRepo } from '../../../infrastructure/layout/repository'
 import { typeMap } from '../../userView/layout'
 import { screenNameMap } from '../../userView/reactNavigation'
 import { emailSchema, passwordSchema } from '../joi'
 import { slice } from '../rtkQuery'
-import GuestScreenContainer from './GuestScreenContainer'
+import GuestScreenBase from './GuestScreen'
 
 const defaultValues = {
   name: '',
@@ -33,29 +33,29 @@ export default memo(function RegistrationScreen() {
   })
   const [signIn, { isLoading }] = slice.endpoints.singIn.useMutation()
   return (
-    <GuestScreenContainer
+    <GuestScreenBase.Container
       heading="Register"
       description="To start using our services, please fill out the registration form
           below. All fields are mandatory:"
       inputs={
         <>
-          <RHFTextInput name="name" control={control} />,
-          <RHFTextInput name="email" control={control} />,
+          <TextInputRHFG name="name" control={control} />,
+          <TextInputRHFG name="email" control={control} />,
           <RHFPasswordInput name="password" control={control} />
         </>
       }
       submitButton={
-        <GuestScreenContainer.SubmitButton
+        <GuestScreenBase.SubmitButton
           onPress={handleSubmit(signIn)}
           isLoading={isLoading}
         >
           Register
-        </GuestScreenContainer.SubmitButton>
+        </GuestScreenBase.SubmitButton>
       }
       screenLink={
-        <GuestScreenContainer.ScreenLink screen={screenNameMap.Login}>
+        <GuestScreenBase.ScreenLink screen={screenNameMap.Login}>
           Login
-        </GuestScreenContainer.ScreenLink>
+        </GuestScreenBase.ScreenLink>
       }
     />
   )

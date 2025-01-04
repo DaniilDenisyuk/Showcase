@@ -79,8 +79,8 @@ export const logoThemeMap = {
 
 export const defaultLogoTheme = buttonThemeMap.dark
 
-export const formTextInputStyleSheet = StyleSheet.create({
-  default: {
+export const textInputStyleSheet = StyleSheet.create({
+  base: {
     height: 56,
     flex: 1,
     border: 1,

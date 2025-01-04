@@ -80,7 +80,7 @@ const styles = StyleSheet.create({
 export default function Button({
   theme = defaultButtonTheme,
   style,
-  children,
+  label,
   onHoverIn,
   onHoverOut,
   ...rest
@@ -104,7 +104,7 @@ export default function Button({
         style
       ]}
     >
-      <TextS18WB theme={buttonThemeToTextThemeMap[theme]}>{children}</TextS18WB>
+      <TextS18WB theme={buttonThemeToTextThemeMap[theme]}>{label}</TextS18WB>
     </Pressable>
   )
 }

@@ -1,5 +1,5 @@
 import { useController } from 'react-hook-form'
-import FormPasswordInput from './FormPasswordInput'
+import PasswordInputFG from './PasswordInputFG'
 
 export default function RHFPasswordInput({
   control,
@@ -13,7 +13,7 @@ export default function RHFPasswordInput({
     fieldState: { isDirty, error }
   } = useController({ control, name, disabled })
   return (
-    <FormPasswordInput
+    <PasswordInputFG
       onBlur={onBlur}
       onChangeText={onChange}
       value={value}

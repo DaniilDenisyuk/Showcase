@@ -1,6 +1,9 @@
 import { hide } from '@floating-ui/core'
+import { useMergeRefs } from '@floating-ui/react'
 import { autoPlacement, offset, useFloating } from '@floating-ui/react-native'
-import { useCallback, useState } from 'react'
+import { useCallback, useContext, useEffect, useMemo, useState } from 'react'
+import { useClickOutside } from 'react-native-click-outside'
+import ScrollView from '../../common/components/ScrollView'
 import { useManagerContext } from '../repository'
 
 export const defaultMiddleware = [
@@ -22,24 +25,38 @@ export function useManager({
     sameScrollView,
     middleware
   })
-  return {
-    isOpened,
-    toggle,
-    setIsOpened,
-    floatingUIContext
-  }
+  const { onScroll } = useContext(ScrollView.Context)
+  useEffect(() => {
+    onScroll(floatingUIContext.scrollProps.onScroll)
+  }, [onScroll])
+  return useMemo(
+    () => ({
+      isOpened,
+      toggle,
+      setIsOpened,
+      floatingUIContext
+    }),
+    [isOpened, toggle, setIsOpened, floatingUIContext]
+  )
 }
 
 export const useFloatingProps = () => {
   const {
-    open,
-    refs: { setFloating: ref },
-    floatingUIContext: { floatingStyles: style }
+    refs: { setFloating },
+    close,
+    floatingUIContext: {
+      floatingStyles: style,
+      middlewareData: { hide: { referenceHidden = false } = {} }
+    }
   } = useManagerContext()
+  const data = useFloatingContext()
+  const pressRef = useClickOutside(() => {
+    close()
+  })
+  const ref = useMergeRefs([setFloating, pressRef])
   return {
     ref,
-    onPress: open,
-    style
+    style: { ...style, visibility: referenceHidden ? 'hidden' : 'visible' }
   }
 }
 
@@ -54,4 +71,8 @@ export const useReferenceProps = () => {
     onPress,
     ref
   }
+}
+
+export const popupFloatingUI = {
+  useManager
 }

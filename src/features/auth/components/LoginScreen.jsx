@@ -3,13 +3,13 @@ import Joi from 'joi'
 import { memo } from 'react'
 import { useForm } from 'react-hook-form'
 import RHFPasswordInput from '../../../infrastructure/common/components/RHFPasswordInput'
-import RHFTextInput from '../../../infrastructure/common/components/RHFTextInput'
+import TextInputRHFG from '../../../infrastructure/common/components/TextInputRHFG'
 import { layoutRepo } from '../../../infrastructure/layout/repository'
 import { typeMap } from '../../userView/layout'
 import { screenNameMap } from '../../userView/reactNavigation'
 import { emailSchema, passwordSchema } from '../joi'
 import { slice } from '../rtkQuery'
-import GuestScreenContainer from './GuestScreenContainer'
+import GuestScreenBase from './GuestScreen'
 
 const defaultValues = {
   email: '',
@@ -29,28 +29,28 @@ export default memo(function LoginScreen() {
   })
   const [signIn, { isLoading }] = slice.endpoints.singIn.useMutation()
   return (
-    <GuestScreenContainer
+    <GuestScreenBase
       shouldShowText
       heading="Login"
       description="Please enter your login details to continue using our service:"
       inputs={
         <>
-          <RHFTextInput name="email" control={control} />,
+          <TextInputRHFG name="email" control={control} />,
           <RHFPasswordInput name="password" control={control} />
         </>
       }
       submitButton={
-        <GuestScreenContainer.SubmitButton
+        <GuestScreenBase.SubmitButton
           onPress={handleSubmit(signIn)}
           isLoading={isLoading}
         >
           Login
-        </GuestScreenContainer.SubmitButton>
+        </GuestScreenBase.SubmitButton>
       }
       screenLink={
-        <GuestScreenContainer.ScreenLink screen={screenNameMap.Registration}>
+        <GuestScreenBase.ScreenLink screen={screenNameMap.Registration}>
           Register
-        </GuestScreenContainer.ScreenLink>
+        </GuestScreenBase.ScreenLink>
       }
     />
   )

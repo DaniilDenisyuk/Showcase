@@ -1,18 +1,13 @@
 import { useState } from 'react'
 import { TextInput as RNTextInput } from 'react-native'
-import { formTextInputStyleSheet } from '../repository'
+import InputLike from './InputLike'
 
-export default function TextInput({ onBlur, onFocus, style, ...rest }) {
+export default function TextInput({ onBlur, onFocus, ...rest }) {
   const [isFocused, setIsFocused] = useState(false)
   return (
-    <RNTextInput
-      style={[
-        style,
-        formTextInputStyleSheet.default,
-        isFocused && formTextInputStyleSheet.focused,
-        isInvalid && formTextInputStyleSheet.invalid,
-        isValid && formTextInputStyleSheet.valid
-      ]}
+    <InputLike
+      As={RNTextInput}
+      isFocused={isFocused}
       onBlur={(e) => {
         onBlur?.(e)
         setIsFocused(false)
